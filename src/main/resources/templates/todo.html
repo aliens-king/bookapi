@@ -1,0 +1,102 @@
+<!-- <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+$( document ).ready(function() {
+	
+	// GET REQUEST
+	$("#getAllCustomerId").click(function(event){
+		event.preventDefault();
+		ajaxGet();
+	});
+	
+	// DO GET
+	function ajaxGet(){
+		$.ajax({
+			type : "GET",
+			url : "/books",
+			success: function(result){
+				alert(result[0]);
+				if(result[0]){
+					$('#getResultDiv ul').empty();
+					var bookList = "";
+					$.each(result, function(i, book){
+						var customer = "- Customer with Id = " + i + ", bookTitle = " + book.title + ", lastName = " + book.author + "<br>";
+						$('#getResultDiv .list-group').append(customer)
+			        });
+					console.log("Success: ", result);
+				}else{
+					$("#getResultDiv").html("<strong>Error!</strong>");
+					console.log("Fail: ", result);
+				}
+			},
+			error : function(e) {
+				$("#getResultDiv").html("<strong>Error</strong>");
+				console.log("ERROR: ", e);
+			}
+		});	
+	}
+})
+
+
+</script>
+
+
+<div class="col-sm-7" style="margin:20px 0px 20px 0px">
+		<button id="getAllCustomerId" type="button" class="btn btn-primary">Get All Customers</button>
+		<div id="getResultDiv" style="padding:20px 10px 20px 50px">
+	        <ul class="list-group">
+	    	</ul>
+    	</div>
+	</div>
+
+</body>
+</html> -->
+
+<!-- ============================================================================================================= -->
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+      
+      <head>
+       <!-- Compiled and minified CSS -->
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      </head>
+      <body>
+      <div class="container">
+      <div th:if="${not #lists.isEmpty(books)}">
+      <table class="highlight">
+      <thead>
+      <tr>
+      <th>id</th>
+      <th>title</th>
+      <th>author</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="book:${books}">
+      <td th:text="${book.id}"></td>
+       <td th:text="${book.title}"></td>
+       <td th:text="${book.author}"></td>
+      </tr>
+      </tbody>
+      </table>
+      </div>
+      
+      
+      </div>
+      
+      </body>
+
+</html>

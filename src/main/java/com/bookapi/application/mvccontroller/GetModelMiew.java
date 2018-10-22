@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/yes")
 public class GetModelMiew {
 	
-	@GetMapping("/check")
+	//@GetMapping("/check")
 	public String getObj() {
 		return"../templates/todo";
 	}
